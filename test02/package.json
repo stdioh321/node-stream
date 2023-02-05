@@ -1,0 +1,12 @@
+{
+  "name": "test02",
+  "version": "1.0.0",
+  "description": "* https://www.youtube.com/watch?v=pB5-QzabL2I",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
