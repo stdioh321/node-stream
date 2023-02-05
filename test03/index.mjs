@@ -1,4 +1,4 @@
-import { pipeline, Transform } from 'stream'
+import { pipeline, Transform, Readable } from 'stream'
 import { promisify } from 'util'
 import { createReadStream, createWriteStream } from 'fs'
 
@@ -27,6 +27,7 @@ const promisedPipeline = promisify(pipeline)
 try {
   await promisedPipeline(
     createReadStream('in.txt', { highWaterMark: 5 }),
+    // Readable.from(['aa','bb']),
     transform,
     createWriteStream('out.txt')
     )
