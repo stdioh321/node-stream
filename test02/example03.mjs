@@ -50,7 +50,7 @@ console.log('Processo 01 acabou');
 
   const readableStream = Readable({
     read(){
-      for(let index = 0; index < 1e6; index++){
+      for(let index = 0; index < 1e5; index++){
         const person = {id: Date.now() + index, name: `Mario-${index}`}
         const data = JSON.stringify(person)
         this.push(data)
@@ -58,11 +58,13 @@ console.log('Processo 01 acabou');
       this.push(null)
     }
   })
+  const time = Date.now()
   await pipelineAsync(
     readableStream,
     writableMapToCSV,
     setHeader,
     createWriteStream('out.csv')
   )
+  console.log(`Took: ${(Date.now() - time)/1000}s`)
   console.log('Processo 02 acabou');
 }
