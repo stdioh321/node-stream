@@ -8,14 +8,21 @@ import {
 } from 'crypto'
 
 import * as dotenv from 'dotenv'
-dotenv.config()
+const envPath = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
+dotenv.config({
+  path: envPath
+})
+
 const PORT = process.env.PORT || 3000
+
+
+const argName = process.argv[2]
 
 function* run() {
   for (let index = 0; index <= 99; index++) {
     const data = {
       id: randomUUID(),
-      name: `Erick-${index}`
+      name: `${argName ?? 'Mario'}-${index}`
     }
     yield data 
   }

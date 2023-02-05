@@ -15,10 +15,14 @@ async function consume() {
   return response.data
 }
 import * as dotenv from 'dotenv'
-dotenv.config()
+const envPath = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
+dotenv.config({
+  path: envPath
+})
+
 const PORT = process.env.PORT || 3000
 const url = `http://localhost:${PORT}`
-
+console.log({url});
 const stream = await consume()
 stream
   .pipe(
