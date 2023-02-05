@@ -3,7 +3,6 @@ import {
   Writable,
 } from 'stream'
 
-const url = 'http://localhost:3000'
 import axios from 'axios'
 
 async function consume() {
@@ -12,9 +11,13 @@ async function consume() {
     method: 'get',
     responseType: 'stream'
   })
-
+  
   return response.data
 }
+import * as dotenv from 'dotenv'
+dotenv.config()
+const PORT = process.env.PORT || 3000
+const url = `http://localhost:${PORT}`
 
 const stream = await consume()
 stream

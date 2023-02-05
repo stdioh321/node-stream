@@ -1,11 +1,15 @@
 import http from 'http'
 import {
-  Readable
+  Readable, pipeline
 } from 'stream'
 
 import {
   randomUUID
 } from 'crypto'
+
+import * as dotenv from 'dotenv'
+dotenv.config()
+const PORT = process.env.PORT || 3000
 
 function* run() {
   for (let index = 0; index <= 99; index++) {
@@ -29,9 +33,19 @@ async function handler(request, response) {
     }
   })
 
-  readable.pipe(response)
+  // readable.pipe(response)
+  pipeline(
+    readable,
+    response,
+    (err) => {
+      if(err)
+        console.log(`Erro:`, err);
+      else
+        console.log(`Sucesso`);
+    }
+  )
 }
 
 http.createServer(handler)
-  .listen(3000)
-  .on('listening', () => console.log('server running at 3000'))
+  .listen(PORT)
+  .on('listening', () => console.log(`server running at ${PORT}`))
