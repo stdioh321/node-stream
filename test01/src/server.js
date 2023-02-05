@@ -7,11 +7,7 @@ import {
   randomUUID
 } from 'crypto'
 
-import * as dotenv from 'dotenv'
-const envPath = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
-dotenv.config({
-  path: envPath
-})
+import config from './config.js'
 
 const PORT = process.env.PORT || 3000
 
